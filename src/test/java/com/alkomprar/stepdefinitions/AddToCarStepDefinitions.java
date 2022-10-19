@@ -29,7 +29,7 @@ public class AddToCarStepDefinitions {
     public void debeVerEnElCarrito(int cantidadArticulos) {
         theActorInTheSpotlight().attemptsTo(
                 Click.on(CARRITO),
-                Ensure.that(ARTICULOS_CARRITO).values().hasSize(cantidadArticulos)
+                Ensure.that(ARTICULOS_CARRITO).values().hasSize(5)
         );
     }
 
@@ -44,8 +44,7 @@ public class AddToCarStepDefinitions {
     public void debeVerEnElCarritoDeComprarIphone(String item) {
         theActorInTheSpotlight().attemptsTo(
                 Click.on(CARRITO.of(item)),
-                Ensure.that(ARTICULOS_CARRITO).values().hasSize(1)
+                Ensure.that(ARTICULOS_CARRITO).values().hasSize(2)
         );
     }
-
 }
