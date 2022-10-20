@@ -15,6 +15,7 @@ import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
 public class AddToCarStepDefinitions {
 
+
     @Cuando("{string} quiere comprar un articulo de las categorias {string}, {string}, {string}  y {string}")
     public void rodolfoQuiereComprarUnCelularComputadorTvYLlanta(String actor, String categoria1, String categoria2, String categoria3, String categoria4) {
         theActorCalled(actor).attemptsTo(
