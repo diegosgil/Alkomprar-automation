@@ -4,15 +4,15 @@ Característica: Fill to car
   Quiero llenar el carro con productos del catalogo
   Para adquirirlos en la tienda
 
-  Escenario: Ver el sofa con el menor precio
-    Cuando Diego seleccione la seccion de hogar y se diriga a sofas
-    Entonces filtrara por el precio menor el cual lo agregara al carrito
+  Escenario: Comprar un mueble del menor precio
+    Cuando "Diego" quiere comprar un "Mueble" en la seccion "Hogar"
+    Entonces comprara 1 mueble filtrando por el menor precio
 
-  Escenario: Recoger en tienda fisica
-    Cuando Diego quiera recoger el televisor en tienda fisica de su ciudad
-    Entonces debera existir como minimo una unidad del articulo deseado en el carrito
+  Escenario: Verificar la cantidad de televisores
+    Cuando "Diego" quiera verificar los resultados por pagina
+    Entonces debera mostrar 50 unidades de televisores
 
   Escenario: Eliminar el articulo del carrito
-    Cuando Diego desee eliminar el televisor del carrito
-    Entonces debera mostrar el carrito vacio
+    Cuando "Diego" desee eliminar el "celular" del carrito
+    Entonces debera mostrar el carrito con 0 articulos
 
