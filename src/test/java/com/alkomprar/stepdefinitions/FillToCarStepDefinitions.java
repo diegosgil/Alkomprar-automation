@@ -8,58 +8,64 @@ import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.ensure.Ensure;
 
 import static com.alkomprar.userinterfaces.CarritoPage.ARTICULOS_CARRITO;
+import static com.alkomprar.userinterfaces.DetalleArticuloPage.DETALLE_ARTICULO;
 import static com.alkomprar.userinterfaces.MenuPage.CARRITO;
+import static com.alkomprar.userinterfaces.ProductosPage.LISTA_PRODUCTOS;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
 public class FillToCarStepDefinitions {
 
-    ///////PRIMER EVENTO
-    @Cuando("{string} quiere comprar un {string} en la seccion {string}")
-    public void diegoQuierecomprarUnEnLASeccion(String actor, String articulo, String categoria) {
+    @Cuando("{string} quiera verificar los {string} en la seccion {string}")
+    public void diegoQuieraVerificarLosEnLaSeccion(String actor, String categoria, String subcategoria) {
         theActorCalled(actor).attemptsTo(
                 Open.url("https://www.alkosto.com/"),
-                ComprarMueble.elemento(articulo, categoria)
-        );
-    }
-    @Entonces("comprara {int} mueble filtrando por el menor precio")
-    public void compraraMuebleFiltrandoPorElMenorPrecio(int cantidadArticulos) {
-        theActorInTheSpotlight().attemptsTo(
-                Click.on(CARRITO),
-                Ensure.that(ARTICULOS_CARRITO).values().hasSize(cantidadArticulos)
-        );
-    }
-
-    ///////SEGUNDO EVENTO
-    @Cuando("{string} quiera verificar los resultados por pagina")
-    public void diegoQuieraVerificarLosResultadosPorPagina(String actor) {
-        theActorCalled(actor).attemptsTo(
-                Open.url("https://www.alkosto.com/"),
-                VerificarArticulos.elemento(actor)
+                VerificarArticulos.elemento(categoria, subcategoria)
         );
     }
     @Entonces("debera mostrar {int} unidades de televisores")
-    public void deberaMostrarUnidadesDeTelevisores(int cantidadArticulos) {
+    public void deberaMostrarUnidadesDeTelevisores() {
         theActorInTheSpotlight().attemptsTo(
-                Click.on(CARRITO),
-                Ensure.that(ARTICULOS_CARRITO).values().hasSize(cantidadArticulos)
+                Ensure.that(DETALLE_ARTICULO).isDisplayed()
         );
     }
 
-    ///////TERCER EVENTO
-    @Cuando("{string} desee eliminar el {string} del carrito")
+    @Cuando("{string} desee eliminar un articulo de la categoria {string} del carrito")
     public void diegoDeseeEliminarElDelCarrito(String actor, String articulo) {
         theActorCalled(actor).attemptsTo(
                 Open.url("https://www.alkosto.com/"),
                 EliminarCarrito.elemento(articulo)
         );
     }
-
     @Entonces("debera mostrar el carrito con {int} articulos")
-    public void deberaMostrarElCarritoConArticulos(int cantidadArticulos) {
+    public void deberaMostrarElCarritoConArticulos(int articulo) {
+        theActorInTheSpotlight().attemptsTo(
+                Ensure.that(ARTICULOS_CARRITO).values().hasSize(articulo)
+        );
+    }
+
+    @Cuando("{string} quiere comprar una {string} en la seccion {string}")
+    public void diegoQuierecomprarUnaEnLaSeccion(String actor, String articulo, String categoria) {
+        theActorCalled(actor).attemptsTo(
+                Open.url("https://www.alkosto.com/"),
+                ComprarRepisa.elemento(articulo, categoria)
+        );
+    }
+    @Entonces("comprara {int} repisa filtrando por el menor precio")
+    public void compraraRepisaFiltrandoPorElMenorPrecio(int articulo) {
         theActorInTheSpotlight().attemptsTo(
                 Click.on(CARRITO),
-                Ensure.that(ARTICULOS_CARRITO).values().hasSize(cantidadArticulos)
+                Ensure.that(ARTICULOS_CARRITO).values().hasSize(articulo)
         );
     }
 }
+
+
+
+
+
+
+
+
+
+

@@ -9,24 +9,24 @@ import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 
 import static com.alkomprar.userinterfaces.ConfirmacionCarritoPage.CERRAR_MODAL;
-import static com.alkomprar.userinterfaces.DetalleArticuloPage.AGREGAR_ELEMENTO_CARRITO;
-import static com.alkomprar.userinterfaces.DetalleArticuloPage.DIV_PRIMER_ELEMENTO;
+import static com.alkomprar.userinterfaces.ConfirmacionCarritoPage.IR_AL_REPISA_MUEBLE;
+import static com.alkomprar.userinterfaces.DetalleArticuloPage.*;
 import static com.alkomprar.userinterfaces.MenuPage.CATEGORIA;
 import static com.alkomprar.userinterfaces.SeleccionarArticuloPage.*;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
-public class ComprarMueble implements Task {
+public class ComprarRepisa implements Task {
     private String articulo, categoria;
 
-    public ComprarMueble(String articulo, String categoria) {
+    public ComprarRepisa(String articulo, String categoria) {
         this.articulo = articulo;
         this.categoria = categoria;
     }
 
     public static Performable elemento(String articulo, String categoria) {
-        return instrumented(ComprarMueble.class, articulo, categoria);
+        return instrumented(ComprarRepisa.class, articulo, categoria);
     }
 
     @Override
@@ -34,21 +34,13 @@ public class ComprarMueble implements Task {
         actor.attemptsTo(
 
                 MoveMouse.to(CATEGORIA.of(categoria)),
-                WaitUntil.the(SUBCATEGORIA_HOGAR, isVisible()),
-                Click.on(SUBCATEGORIA_HOGAR),
-                Scroll.to(ORDENAR_POR).andAlignToTop(),
-                WaitUntil.the(ORDENAR_POR, isVisible()),
+                WaitUntil.the(SUBCATEGORIA_HOGAR_REPISA, isVisible()),
+                Click.on(SUBCATEGORIA_HOGAR_REPISA),
+                WaitUntil.the(ORDENAR_POR, isClickable()),
                 Click.on(ORDENAR_POR),
                 Click.on(MENOR_A_MAYOR),
-
-                Scroll.to(DIV_PRIMER_ELEMENTO).andAlignToTop(),
-
-                WaitUntil.the(AGREGAR_ELEMENTO_CARRITO, isClickable()),
-
+                Scroll.to(ORDENAR_POR).andAlignToTop(),
                 Click.on(AGREGAR_ELEMENTO_CARRITO),
-
-                WaitUntil.the(CERRAR_MODAL, isClickable()),
-
                 Click.on(CERRAR_MODAL)
         );
     }
